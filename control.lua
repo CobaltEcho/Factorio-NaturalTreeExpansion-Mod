@@ -134,9 +134,9 @@ function on_tick(event)
 				local px = math.floor(chunk.x / 4)
 				local py = math.floor(chunk.y / 4)
 				for y=-1,1 do
-					if playermap[py + y] then
+					if global.playermap[py + y] then
 						for x=-1,1 do
-							if playermap[py + y][px + x] and m < playermap[py + y][px + x] + freq2 then
+							if global.playermap[py + y][px + x] and m < global.playermap[py + y][px + x] + freq2 then
 								return true
 							end
 						end
@@ -217,7 +217,7 @@ function on_tick(event)
 			-- Return [rows,active,visited] playermap chunks
 			local function countPlayerMap()
 				local ret = {0,0,0}
-				for i,v in pairs(playermap) do
+				for i,v in pairs(global.playermap) do
 					ret[1] = ret[1] + 1
 					for j,w in pairs(v) do
 						if m < w + freq2 then
