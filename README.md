@@ -1,8 +1,18 @@
 Natural Tree Expansion -- A Mod for Factorio v0.14
 ========================================
 
-This is a mod for a game called Factorio. It's compatible with Factorio v0.14.
-(Use v0.1.x for Factorio v0.13.x)
+Update 3.2
+*Multiplayer desycnc issue should be corrected.  I have tested on multiplayer and seems to be working.  Also upped the spawn rate of the trees.
+
+========================================
+
+Update 3.0 and 3.1
+*Failed attempts at fixing multiplayer desync.
+
+========================================
+
+Orignal post by msakuta:
+
 This mod will make trees automatically reproduce and expand over time.
 The growth rate is very low (otherwise you'd drown in forest in long game),
 but you can configure it in config.lua if you want.
