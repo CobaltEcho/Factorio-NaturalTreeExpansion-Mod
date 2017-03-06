@@ -85,7 +85,9 @@ end
 -- calculating large set of data. Also we only need very rough estimation, so
 -- chunk granularity is too fine for us.
 playermap_freq = 4
-global.player_map = {}
+if not global.player_map then 
+    global.player_map = {}
+end
 
 local function update_player_map(m, surface)
 	local mm = m % #shuffle + 1
