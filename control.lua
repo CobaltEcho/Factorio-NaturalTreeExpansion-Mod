@@ -84,18 +84,18 @@ end
 -- chunks, because it's not good idea to make scripting languages like Lua
 -- calculating large set of data. Also we only need very rough estimation, so
 -- chunk granularity is too fine for us.
-local playermap_freq = 4
-local playermap = {}
+playermap_freq = 4
+playermap = {}
 
-local function update_player_map(m, surface)
-	local mm = m % #shuffle + 1
-	local mx = shuffle[mm] % freq
-	local my = math.floor(shuffle[mm] / freq)
+function update_player_map(m, surface)
+	mm = m % #shuffle + 1
+	mx = shuffle[mm] % freq
+	my = math.floor(shuffle[mm] / freq)
 	for chunk in surface.get_chunks() do
 		if fmod(chunk.x + mx, freq) == 0 and fmod(chunk.y + my, freq) == 0 and
 			0 < surface.count_entities_filtered{area = {{chunk.x * chunksize, chunk.y * chunksize}, {(chunk.x + 1) * chunksize, (chunk.y + 1) * chunksize}}, force = "player"} then
-			local px = math.floor(chunk.x / 4)
-			local py = math.floor(chunk.y / 4)
+			px = math.floor(chunk.x / 4)
+			py = math.floor(chunk.y / 4)
 			if playermap[py] == nil then
 				playermap[py] = {}
 			end
