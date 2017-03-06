@@ -3,15 +3,17 @@ Natural Tree Expansion -- A Mod for Factorio v0.14
 
 Update 3.2
 
-By CobaltEcho with daniel34 doing most of the work!
+* Instigated by CobaltEcho with Daniel34 doing most of the work!
 
-*Multiplayer desync issue should be corrected.  I have tested on multiplayer and seems to be working.  Also upped the spawn rate of the trees.
+* Multiplayer desync issue should be corrected.  I have tested on multiplayer and seems to be working.  Also upped the spawn rate of the trees.
+
+* Forum notes at: https://forums.factorio.com/viewtopic.php?f=25&t=42313
 
 ========================================
 
 Update 3.0 and 3.1
 
-*Failed attempts at fixing multiplayer desync.
+* Failed attempts at fixing multiplayer desync.
 
 ========================================
 
