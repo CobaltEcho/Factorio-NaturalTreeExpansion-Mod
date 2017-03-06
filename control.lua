@@ -2,7 +2,7 @@ require "config"
 
 local freq = 16
 local freq2 = freq ^ 2
-local totalgen = 0
+global.totalgen = 0
 local chunksize = 32
 local original_tree_count = 0
 
@@ -191,7 +191,7 @@ function on_tick(event)
 				end
 			end
 		end
-		totalgen = totalgen + num
+		global.totalgen = global.totalgen + num
 	end
 
 	-- First, cache player map data by searching player owned entities.
@@ -213,36 +213,37 @@ function on_tick(event)
 		end
 
 		if enable_debug_window then
-
-			-- Return [rows,active,visited] playermap chunks
-			local function countPlayerMap()
-				local ret = {0,0,0}
-				for i,v in pairs(global.playermap) do
-					ret[1] = ret[1] + 1
-					for j,w in pairs(v) do
-						if m < w + freq2 then
-							ret[2] = ret[2] + 1
+			for _, player in pairs(game.players) do
+				-- Return [rows,active,visited] playermap chunks
+				local function countPlayerMap()
+					local ret = {0,0,0}
+					for i,v in pairs(global.playermap) do
+						ret[1] = ret[1] + 1
+						for j,w in pairs(v) do
+							if m < w + freq2 then
+								ret[2] = ret[2] + 1
+							end
+							ret[3] = ret[3] + 1
 						end
-						ret[3] = ret[3] + 1
 					end
+					return ret
 				end
-				return ret
-			end
 
-			if not game.players[1].gui.left.trees then
-				game.players[1].gui.left.add{type="frame", name="trees", caption="Trees", direction="vertical"}
-				-- original_tree_count = game.surfaces[1].count_entities_filtered{area={{-10000,-10000},{10000,10000}},type="tree"}
-				game.players[1].gui.left.trees.add{type="label",name="m",caption="Cycle: " .. m % #shuffle .. "/" .. #shuffle}
-				game.players[1].gui.left.trees.add{type="label",name="total",caption="Total trees: " .. count_trees()}
-				game.players[1].gui.left.trees.add{type="label",name="count",caption="Added trees: " .. totalgen}
-				game.players[1].gui.left.trees.add{type="label",name="playermap"}
-			else
-				game.players[1].gui.left.trees.m.caption = "Cycle: " .. m % #shuffle .. "/" .. #shuffle
-				game.players[1].gui.left.trees.total.caption = "Total trees: " .. count_trees()
-				game.players[1].gui.left.trees.count.caption = "Added trees: " .. totalgen
+				if not player.gui.left.trees then
+					player.gui.left.add{type="frame", name="trees", caption="Trees", direction="vertical"}
+					-- original_tree_count = game.surfaces[1].count_entities_filtered{area={{-10000,-10000},{10000,10000}},type="tree"}
+					player.gui.left.trees.add{type="label",name="m",caption="Cycle: " .. m % #shuffle .. "/" .. #shuffle}
+					player.gui.left.trees.add{type="label",name="total",caption="Total trees: " .. count_trees()}
+					player.gui.left.trees.add{type="label",name="count",caption="Added trees: " .. global.totalgen}
+					player.gui.left.trees.add{type="label",name="playermap"}
+				else
+					player.gui.left.trees.m.caption = "Cycle: " .. m % #shuffle .. "/" .. #shuffle
+					player.gui.left.trees.total.caption = "Total trees: " .. count_trees()
+					player.gui.left.trees.count.caption = "Added trees: " .. global.totalgen
+				end
+				local cc = countPlayerMap()
+				player.gui.left.trees.playermap.caption = "Playermap: " .. cc[1] .. "/" .. cc[2] .. "/" .. cc[3]
 			end
-			local cc = countPlayerMap()
-			game.players[1].gui.left.trees.playermap.caption = "Playermap: " .. cc[1] .. "/" .. cc[2] .. "/" .. cc[3]
 		end
 	end
 end
