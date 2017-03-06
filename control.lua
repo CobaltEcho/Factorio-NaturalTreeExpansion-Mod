@@ -98,10 +98,10 @@ local function update_player_map(m, surface)
 			0 < surface.count_entities_filtered{area = {{chunk.x * chunksize, chunk.y * chunksize}, {(chunk.x + 1) * chunksize, (chunk.y + 1) * chunksize}}, force = "player"} then
 			local px = math.floor(chunk.x / 4)
 			local py = math.floor(chunk.y / 4)
-			if playermap[py] == nil then
-				playermap[py] = {}
+			if global.playermap[py] == nil then
+				global.playermap[py] = {}
 			end
-			playermap[py][px] = m
+			global.playermap[py][px] = m
 		end
 	end
 end
