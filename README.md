@@ -1,7 +1,7 @@
 Natural Tree Expansion -- A Mod for Factorio v0.14
 ========================================
 
-Update 3.2
+Update 3.2 - Multiplayer desync fixed
 
 * Instigated by CobaltEcho with Daniel34 doing most of the work!
 
